@@ -18,10 +18,8 @@
 			<th>번호</th>
 			<th>제목</th>
 			<th>작성자</th>
-		</tr> 
-		<!--  
-		HTML 자체적으로 DOM요소를 선택할때는 this를 통해 설정할 수 있다. 
-		-->
+		</tr>  
+		<!-- HTML 자체적으로 DOM요소를 선택할때는 this를 통해 설정할 수 있다. -->
 		<tr style="background-color:gray;"
 			onmouseover="this.style.backgroundColor='green';"
 			onmouseout="this.style.backgroundColor='gray';">
@@ -52,29 +50,31 @@
 		</tr>
 	</table>
         
-	<!--  
-	mousedown : 마우스를 클릭했을때 발생하는 이벤트
+	
+	<!-- 
+	mousedown : 마우스로 클릭했을때 발생하는 이벤트
 	mouseup : 클릭 후 땠을때 발생하는 이벤트 
 	-->
 	<script>
 	function fnScale(flag){
-		//id속성으로 DOM요소를 가져온다. 
+		//id속성으로 DOM 요소 얻어옴
 		var title = document.getElementById("title");		 
-		//div태그 중 첫번째 요소를 가져온다. 
+		//div 태그 중 첫번째 요소를 얻어옴 
 		var div = document.getElementsByTagName("div")[0];
 		if(flag==1){
 			//1이면 mousedown 이벤트 
 			title.innerHTML = "<big>mousedown 이벤트 발생</big>";
-			//배경색을 녹색으로 변경
 			div.style.backgroundColor = "green";	
 			console.log("현재크기", div.style.width, div.style.height);
-			/* div상자의 크기를 얻어와서 number 타입으로 변환 후 2를 곱해준다.
-			즉 크기를 2배로 증가시킨다. DOM을 통해 읽어온 값은 string이므로 
-			연산을 위해서는 number 타입으로 변환해야한다. */
+			/* 
+			div상자의 크기를 얻어와서 number 타입으로 변환 후 2를 곱한다. 
+			즉 크기를 2배로 확대한다. DOM을 통해 얻어온 값은 string이므로
+			연산을 위해 number타입으로 변환해야한다. */
 			div.style.width = parseInt(div.style.width)*2 +"px";
 			div.style.height = parseInt(div.style.height)*2 +"px";
 		}
 		else if(flag==2){ 
+			//마우스를 때면 원래상태로 변환한다. 
 			title.innerHTML = "mouseup 이벤트 발생";
 			div.style.backgroundColor = "red";
 			div.style.width = "100px";
@@ -89,36 +89,34 @@
 		여기를 클릭해보세요
 	</div>    
     
- 
-
-
 	
 	<script>
-	//전역변수 생성
+	//전역변수 
 	var timer, count=1, divObj;	
 	function setTimer(obj){
 		/* 
-		div태그에서 this를 통해 전달한 DOM요소를 매개변수로 받은 후 전역변수에
+		div태그에서 this를 통해 전달한 DOM 요소를 매개변수로 받은 후 전역변수에
 		할당한다. */
 		divObj = obj;
 		/*
-		0.3초에 한번씩 moveObj 함수를 호출한다. 이때 setInterval 함수가 반환한
-		참조값을 timer 변수에 저장한다. */
+		0.3초에 한번씩 moveObj 함수를 호출한다. 이때 타이머함수가 반환한
+		참조값을 전역변수에 할당한다. */
 		timer = setInterval("moveObj()", 300);
 	}
 	function moveObj(){
 		console.log("나 호출됨?");
-		/* 
-		이 함수가 3번 호출되면 타이머 변수를 이용해서 중지시킨다. */
+		/*
+		이 함수가 3번 호출되면 타이머 변수를 이용해서 중지시킨다. 
+		즉 상자의 이동을 멈춘다. */
 		if(count%3==0){					 
 			clearInterval(timer);
 		}
 		//전역변수를 증가시키므로 초기화되지 않고 계속 증가만 한다. 
 		count++;
-		/*
-		div 상자의 left 속성값을 얻어온 후 50씩 증가시킨다. left 속성값이 
-		증가하면 좌측여백이 생겨 상자가 오른쪽으로 이동하는것처럼 보이게된다. */
 		var left = parseInt(divObj.style.left);	
+		/*
+		div상자의 left 속성값을 얻어온 후 50씩 증가시킨다. left 속성값이
+		증가하면 좌측여백이 생겨 상자가 오른쪽으로 이동하는 것처럼 보인다. */
 		divObj.style.left = (left + 50) +"px";
 	}
 	</script>

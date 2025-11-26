@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    //전역변수 생성(사용자와 컴퓨터의 이미지, 타이머 변수)
+    var comImg, userImg, timer;
+    //가위바위보 이미지를 표현하기 위한 배열생성 
+    var imgArr = ['scissors','rock','paper'];
+    window.onload = function(){
+        //문서가 로드되면 <img>의 DOM을 가져온다. 
+        comImg = document.getElementById('com');
+        userImg = document.getElementById('user');
+
+        //이미지를 토글시킨다. 
+        timer = setInterval('imgChange()', 100);
+    }    
+    //사용자가 버튼을 누르면 게임이 시작된다. 
+    function gameStart(user){
+
+        //이미지 토글을 중지시킨다. 
+        clearInterval(timer);
+
+        //컴퓨터가 난수를 통해 먼저 하나를 생성한다. 
+        var com = parseInt(Math.random()*3) + 1;
+        //컴퓨터의 이미지를 변경한다. 
+        if(com==1) comImg.src = '../images/scissors.jpg';
+        if(com==2) comImg.src = '../images/rock.jpg';
+        if(com==3) comImg.src = '../images/paper.jpg';
+
+        //사용자의 이미지를 변경한다. 
+        /* 사용자는 1~3까지를 내고, 이미지 배열은 0~2까지의 인덱스가
+        있으므로 사용자에서 -1하면 해당 이미지명이 된다. */
+        userImg.src = '../images/'+imgArr[user-1]+'.jpg';
+
+        //승부판단
+        var result = document.getElementById('result');
+        switch(user - com){
+            case 0:
+                result.innerText = "비겼습니다.";
+            break;
+            case 1: case -2:
+                result.innerHTML = "<strong>승리했습니다.</strong>";
+            break;
+            case -1: case 2:
+                result.innerHTML = "<del>패배했습니다.</del>";
+        }
+    }
+
+    //이미지 토글을 위한 전역변수 
+    var incNum1=0, incNum2=2;
+    //가위바위보 이미지를 지속적으로 변경시킨다. 
+    function imgChange(){
+        /* 변수를 지속적으로 증가시키되 3으로 나누면 나머지는
+        0~2까지만 나오므로 이미지 토글이 가능하다. */
+        comImg.src = '../images/'+imgArr[++incNum1%3]+'.jpg';
+        userImg.src = '../images/'+imgArr[++incNum2%3]+'.jpg';
+    }
+    
+    </script>
+</head>
+<body>
+    <h2>가위바위보 게임 만들기</h2>
+    <hr>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>컴퓨터</th>
+            <th>나</th>
+        </tr>
+        <tr>
+            <td><img src="../images/start.png" id="com"></td>
+            <td><img src="../images/start.png" id="user"></td>
+        </tr>
+        <tr>
+            <td colspan="2" id="result">
+                결과출력
+            </td>
+        </tr>
+    </table>
+    <!-- <button> 태그는 default type이 submit이므로 일반적인
+        버튼으로 만들려면 아래와 같이 button타입을 명시해야한다. -->
+    <div>
+        <button type="button" onclick="gameStart(1);">가위</button>
+        <button type="button" onclick="gameStart(2);">바위</button>
+        <button type="button" onclick="gameStart(3);">보자기</button>
+    </div>
+    <input type="button" value="이미지변경하기" onclick="imgChange();">
+    <br><br><br><br><br>
+</body>
+</html>

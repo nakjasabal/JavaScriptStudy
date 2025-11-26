@@ -12,25 +12,25 @@
 <body>        
     <h3>이벤트 객체의 프로퍼티 출력</h3>
     <!-- 
-    type : 현재 발생한 이벤트의 종류를 나타내는 문자열(click, load 등)
+    type : 현재 발생한 이벤트의 종류를 나타내는 문자열(click, load등)
     target : 이벤트를 발생시킨 객체(DOM 혹은 HTML태그)
     currentTarget : 현재 이벤트리스너를 실행하고 있는 DOM요소
-    defaultPrevented : 이벤트의 디폴트 동작이 취소되었는지 나타내는 boolean값
-    preventDefault : 이벤트의 디폴트 동작을 취소(차단) 시키는 함수 
+    defaultPrevented : 이벤트의 디폴트(기본) 동작이 취소되었는지 나타내는
+        boolean 값
+    preventDefault() : 이벤트의 기본 동작을 차단시키는 함수 
     -->
-    <script>
-    /* 이벤트 리스너에서 함수 호출시 전달하는 이벤트 객체를 매개변수로 받은 후
-    여러가지 형태로 활용할 수 있다. */
+    <script>        
+    /* 이벤트 리스너에서 함수 호출시 전달하는 이벤트 객체를 매개변수로
+    받은 후 여러가지 형태로 활용할 수 있다. */    
     function f(e) {
-        //이벤트 객체를 통해 얻은 정보를 문자열로 연결
         var text = "type : " + e.type + "<br>" 
                 + "target : " + e.target.tagName + "<br>"
                 + "currentTarget : " + e.currentTarget + "<br>";
-        //이벤트가 click 일때만 디폴트 동작을 차단한다. 
+        //이벤트가 click 일때만 디폴트동작을 차단한다. 
         if(e.type=='click'){
             e.preventDefault();
         }
-        //이벤트가 취소되었는지 확인하기 위한 속성으로 문자열 연결 
+        //이벤트가 차단되었는지 여부는 아래 속성으로 알 수 있다. 
         text += "defaultPrevented: " + e.defaultPrevented;
         var p = document.getElementById("p");		
         p.innerHTML = text;

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 문제05] 문자열 배열의 각 요소의 첫 글자만 추출하여 새로운 배열을 
+     반환하는 프로그램을 작성하시오.  -->
+    <script>
+        const words = ['hello', 'world', 'javascript', 'typescript'];
+        initCapWords = words.map( w => w.charAt(0));
+        /*
+        initCapWords = words.map( (w) => {
+            return w.charAt(0)
+        }); */
+        console.log(initCapWords);
+    </script>
+</body>
+</html>

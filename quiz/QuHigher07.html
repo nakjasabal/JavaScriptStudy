@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 문제07] filter() 함수를 사용하여 문자열 길이가 6 이상인 문자열만 
+     추출하는 프로그램을 작성하시오.  -->
+    <script>
+        const words = ['apple', 'banana', 'cherry', 'orange', 'grape'];
+        fiveWords = words.filter( w => {
+            return w.length >= 6;
+        });
+        console.log(fiveWords);
+    </script>
+</body>
+</html>
